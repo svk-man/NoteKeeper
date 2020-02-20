@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView notesRecyclerView;
-    private ArrayList<Note> notes = new ArrayList<>();
+    public static final ArrayList<Note> notes = new ArrayList<>();
+    private FloatingActionButton mButtonAddNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +30,14 @@ public class MainActivity extends AppCompatActivity {
         NotesAdapter adapter = new NotesAdapter(notes);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         notesRecyclerView.setAdapter(adapter);
+
+        mButtonAddNote = (FloatingActionButton) findViewById(R.id.button_add_note);
+        mButtonAddNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
