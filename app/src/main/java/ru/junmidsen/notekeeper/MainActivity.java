@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView notesRecyclerView;
     public static final ArrayList<Note> notes = new ArrayList<>();
     private FloatingActionButton mButtonAddNote;
+    private NotesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +31,18 @@ public class MainActivity extends AppCompatActivity {
             notes.add(new Note("2 задача", "Как уже неоднократно упомянуто, действия представителей оппозиции формируют глобальную экономическую сеть и при этом - ограничены исключительно образом мышления. Не следует, однако, забывать, что синтетическое тестирование не оставляет шанса для первоочередных требований.", 2));
             notes.add(new Note("3 задача", "Равным образом, современная методология разработки представляет собой интересный эксперимент проверки новых предложений.", 3));
         }
-        NotesAdapter adapter = new NotesAdapter(notes);
+        adapter = new NotesAdapter(notes);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         notesRecyclerView.setAdapter(adapter);
+        adapter.setOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
+            @Override
+            public void onNoteLongClick(int position) {
+                remove(position);
+                Toast.makeText(MainActivity.this,
+                                R.string.toast_remove_note,
+                                Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mButtonAddNote = (FloatingActionButton) findViewById(R.id.button_add_note);
         mButtonAddNote.setOnClickListener(new View.OnClickListener() {
@@ -41,5 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void remove(int position) {
+        notes.remove(position);
+        adapter.notifyDataSetChanged();
     }
 }

@@ -6,4 +6,5 @@
     <string name="hint_description">Описание заметки</string>
     <string name="button_save_note">Добавить заметку</string>
     <string name="color_green_id">3</string>
+    <string name="toast_remove_note">Заметка успешно удалена</string>
 </resources>
