@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:checked="true"
             android:background="@android:color/holo_red_light"
-            android:text="@string/color_red" />
+            android:text="@string/color_red_id" />
 
         <RadioButton
             android:id="@+id/radio_button_color_yellow"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/holo_orange_dark"
-            android:text="@string/color_yellow" />
+            android:text="@string/color_yellow_id" />
 
         <RadioButton
             android:id="@+id/radio_button_color_green"
@@ -70,11 +70,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/holo_green_light"
-            android:text="Зелёный" />
+            android:text="@string/color_green_id" />
     </RadioGroup>
 
     <Button
-        android:id="@+id/button_add_note"
+        android:id="@+id/button_save_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

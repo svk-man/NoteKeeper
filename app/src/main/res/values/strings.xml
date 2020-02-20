@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">NoteKeeper</string>
-    <string name="color_red">Красный</string>
-    <string name="color_yellow">Оранжевый</string>
-    <string name="hint_title">Заголовок заметки:</string>
-    <string name="hint_description">Описание заметки:</string>
+    <string name="color_red_id">1</string>
+    <string name="color_yellow_id">2</string>
+    <string name="hint_title">Заголовок заметки</string>
+    <string name="hint_description">Описание заметки</string>
     <string name="button_save_note">Добавить заметку</string>
+    <string name="color_green_id">3</string>
 </resources>
