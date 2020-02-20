@@ -16,6 +16,7 @@ public class AddNoteActivity extends AppCompatActivity {
     private EditText mEditTextDescription;
     private RadioGroup mRadioGroupColor;
     private Button mButtonSaveNote;
+    private int notePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,20 @@ public class AddNoteActivity extends AppCompatActivity {
         mEditTextTitle = (EditText) findViewById(R.id.edit_text_title);
         mEditTextDescription = (EditText) findViewById(R.id.edit_text_description);
         mRadioGroupColor = (RadioGroup) findViewById(R.id.radio_group_color);
-
         mButtonSaveNote = (Button) findViewById(R.id.button_save_note);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("title")) {
+            String title = intent.getStringExtra("title");
+            String description = intent.getStringExtra("description");
+            int radioButtonId = intent.getIntExtra("color_id", 1);
+            notePosition = intent.getIntExtra("position", -1);
+            mEditTextTitle.setText(title);
+            mEditTextDescription.setText(description);
+            RadioButton radioButton = (RadioButton) mRadioGroupColor.getChildAt(notePosition);
+            radioButton.setChecked(true);
+        }
+
         mButtonSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +49,12 @@ public class AddNoteActivity extends AppCompatActivity {
                 RadioButton radioButton = findViewById(radioButtonId);
                 int colorId = Integer.parseInt(radioButton.getText().toString());
                 Note note = new Note(title, description, colorId);
-                MainActivity.notes.add(note);
+                if (notePosition == -1) {
+                    MainActivity.notes.add(note);
+                } else {
+                    MainActivity.notes.set(notePosition, note);
+                }
+
                 Intent intent = new Intent(AddNoteActivity.this, MainActivity.class);
                 startActivity(intent);
             }

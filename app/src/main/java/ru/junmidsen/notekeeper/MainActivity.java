@@ -36,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
         notesRecyclerView.setAdapter(adapter);
         adapter.setOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
             @Override
+            public void onNoteClick(int position) {
+                Note note = notes.get(position);
+                Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
+                intent.putExtra("title", note.getTitle());
+                intent.putExtra("description", note.getDescription());
+                intent.putExtra("color_id", note.getColorId());
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+
+            @Override
             public void onNoteLongClick(int position) {
                 remove(position);
                 Toast.makeText(MainActivity.this,
